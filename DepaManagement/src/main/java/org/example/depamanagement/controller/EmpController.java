@@ -1,17 +1,23 @@
 package org.example.depamanagement.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.depamanagement.pojo.Emp;
 import org.example.depamanagement.pojo.PageBean;
 import org.example.depamanagement.pojo.Result;
 import org.example.depamanagement.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * 这个类是：
@@ -28,6 +34,24 @@ import java.time.LocalDate;
 public class EmpController {
   @Autowired
   private EmpService empService;
+
+  //新增
+  @PostMapping
+  public Result save(@RequestBody Emp emp){
+    //记录日志
+    log.info("新增员工, emp:{}",emp);
+    //调用业务层新增功能
+    empService.save(emp);
+    //响应
+    return Result.success();
+  }
+
+  //批量删除
+  @DeleteMapping("/{ids}")
+  public Result delete(@PathVariable List<Integer> ids){
+    empService.delete(ids);
+    return Result.success();
+  }
 
  /* // 条件分页查询
   @GetMapping

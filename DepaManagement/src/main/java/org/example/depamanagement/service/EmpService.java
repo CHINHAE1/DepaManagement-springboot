@@ -1,8 +1,10 @@
 package org.example.depamanagement.service;
 
+import org.example.depamanagement.pojo.Emp;
 import org.example.depamanagement.pojo.PageBean;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * 这个类是：
@@ -13,6 +15,19 @@ import java.time.LocalDate;
  */
 // 员工业务规则接口
 public interface EmpService {
+
+  /**
+   * 保存员工信息
+   * @param emp
+   */
+  void save(Emp emp);
+
+  /**
+   * 批量删除操作
+   * @param ids id集合
+   */
+  void delete(List<Integer> ids);
+
   /**
    * 条件分页查询
    *

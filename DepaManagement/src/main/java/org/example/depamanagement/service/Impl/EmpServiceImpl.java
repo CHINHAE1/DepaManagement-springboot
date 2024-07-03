@@ -3,6 +3,7 @@ package org.example.depamanagement.service.Impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.example.depamanagement.mapper.EmpMapper;
@@ -23,7 +24,22 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class EmpServiceImpl implements EmpService {
-  @Autowired private EmpMapper empMapper;
+  @Autowired
+  private EmpMapper empMapper;
+
+  @Override
+  public void save(Emp emp) {
+    //补全数据
+    emp.setCreateTime(LocalDateTime.now());
+    emp.setUpdateTime(LocalDateTime.now());
+    //调用添加方法
+    empMapper.insert(emp);
+  }
+
+  @Override
+  public void delete(List<Integer> ids) {
+    empMapper.delete(ids);
+  }
 
   /*@Override
   public PageBean page(Integer page, Integer pageSize) {
