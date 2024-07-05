@@ -1,5 +1,6 @@
 package org.example.depamanagement.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,6 +19,24 @@ import java.util.List;
  */
 @Mapper
 public interface EmpMapper {
+
+    //根据部门id删除部门下所有员工
+    @Delete("delete from emp where dept_id=#{deptId}")
+    public int deleteByDeptId(Integer deptId);
+
+    @Select("select id, username, password, name, gender, image, job, entrydate, dept_id, create_time, update_time " +
+            "from emp " +
+            "where username=#{username} and password =#{password}")
+    public Emp getByUsernameAndPassword(Emp emp);
+
+    //修改员工信息
+    public void update(Emp emp);
+
+    //根据ID查询员工信息
+    @Select("select id, username, password, name, gender, image, job, entrydate, dept_id, create_time, update_time " +
+            "from emp " +
+            "where id = #{id}")
+    public Emp findById(Integer id);
 
     //新增员工
     @Insert("insert into emp (username, name, gender, image, job, entrydate, dept_id, create_time, update_time) " +

@@ -17,6 +17,26 @@ import java.util.List;
 public interface EmpService {
 
   /**
+   * 用户登录
+   * @param emp
+   * @return
+   */
+  public Emp login(Emp emp);
+
+  /**
+   * 更新员工
+   * @param emp
+   */
+  public void update(Emp emp);
+
+  /**
+   * 根据ID查询员工
+   * @param id
+   * @return
+   */
+  public Emp getById(Integer id);
+
+  /**
    * 保存员工信息
    * @param emp
    */

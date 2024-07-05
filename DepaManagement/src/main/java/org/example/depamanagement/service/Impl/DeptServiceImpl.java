@@ -2,6 +2,7 @@ package org.example.depamanagement.service.Impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.depamanagement.mapper.DeptMapper;
+import org.example.depamanagement.mapper.EmpMapper;
 import org.example.depamanagement.pojo.Dept;
 import org.example.depamanagement.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,10 @@ public class DeptServiceImpl implements DeptService {
     @Autowired
     private DeptMapper deptMapper;
 
+    @Autowired
+    private EmpMapper empMapper;
+
+
     @Override
     public void add(Dept dept) {
         //补全部门数据
@@ -34,10 +39,17 @@ public class DeptServiceImpl implements DeptService {
         deptMapper.inser(dept);
     }
 
+    //根据部门id，删除部门信息及部门下的所有员工
     @Override
     public void delete(Integer id) {
-        //调用持久层删除功能
+        //根据部门id删除部门信息
         deptMapper.deleteById(id);
+
+        //模拟:异常发生
+        int i = 1/0;
+
+        //删除部门下的所有员工信息
+        empMapper.deleteByDeptId(id);
     }
 
     @Override
